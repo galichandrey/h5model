@@ -129,6 +129,10 @@ OHLC_avg = scaler.inverse_transform(OHLC_avg)
 last_val = testPredict[-1]
 last_val_scaled = last_val/last_val
 next_val = model.predict(np.reshape(last_val_scaled, (1,1,1)))
+
+print ('')
+print ('')
+print ('')
 print ('Last Day Value:', last_val.item())
 
 #print "Next Day Value:", np.asscalar(last_val*next_val)
