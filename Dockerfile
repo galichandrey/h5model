@@ -3,4 +3,4 @@ WORKDIR /root
 COPY script.py /root/
 COPY myh5model.h5 /root/
 
-RUN pip3 install pandas matplotlib numpy sklearn datetime python-binance 
+RUN pip3 install pandas matplotlib numpy scikit-learn datetime python-binance
