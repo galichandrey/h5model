@@ -82,12 +82,10 @@ dataset.drop(['Open Time', 'Volume', 'Close Time', 'Quote Asset Volume', 'Number
 #dataset.drop(['Volume', 'Quote Asset Volume', 'Number of Trades', 'TB Base Volume', 'TB Quote Volume','Ignore'],1,inplace=True)
 
 #df.drop(['Volume', 'Quote Asset Volume', 'Number of Trades', 'TB Base Volume', 'TB Quote Volume','Ignore'],1,inplace=True)
-#dataset.info()
-#df.head()
-#dataset.tail()
+
 
 dataset['OHLC_avg'] = dataset[['Open','High', 'Low', 'Close']].mean(axis = 1)
-#dataset.tail(5)
+
 
 # CREATING OWN INDEX FOR FLEXIBILITY
 obs = np.arange(1, len(dataset) + 1, 1)
@@ -125,7 +123,7 @@ step_size = 1
 
 #https://github.com/galichandrey/h5model/raw/main/myh5model.h5
 #model = tf.keras.models.load_model('my_h5_model.h5')
-!wget https://github.com/galichandrey/h5model/raw/main/myh5model.h5
+#!wget https://github.com/galichandrey/h5model/raw/main/myh5model.h5
 model = tf.keras.models.load_model('myh5model.h5')
 
 # Check its architecture
