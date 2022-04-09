@@ -29,7 +29,6 @@ def new_dataset(dataset, step_size):
 # FOR REPRODUCIBILITY
 np.random.seed(4)
 
-!pip install python-binance
 from binance import Client, ThreadedWebsocketManager, ThreadedDepthCacheManager
 # Binance dependencies that we are importing here !
 
