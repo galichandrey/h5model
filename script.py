@@ -53,24 +53,17 @@ float(crypto_df.loc['BTCUSDT']['price'])
 #Getting market depth if you are in BTC !
 depth = client.get_order_book(symbol='BTCUSDT')
 
-#depth
-# getting all bids with last updated time
 
 depth_df = pd.DataFrame(depth['asks'])
 depth_df.columns = ['Price', 'ASK_Volume']
-#depth_df.head()
 
 depth_df1 = pd.DataFrame(depth['bids'])
 depth_df1.columns = ['Price', 'BIDS_Volume']
-#depth_df1.head()
 
 #client.get_historical_klines??
 
 historical = client.get_historical_klines('BTCUSDT', Client.KLINE_INTERVAL_1DAY, '1 Jan 2011')
-#historical = client.get_historical_klines('BTCUSDT', Client.KLINE_INTERVAL_4HOUR, '1 Jan 2011')
-#historical
 
-#hist_df = pd.DataFrame(historical)
 dataset = pd.DataFrame(historical).astype(np.float32)
 
 dataset.columns = ['Open Time', 'Open', 'High', 'Low', 'Close', 'Volume', 'Close Time', 'Quote Asset Volume', 
@@ -79,9 +72,6 @@ dataset.columns = ['Open Time', 'Open', 'High', 'Low', 'Close', 'Volume', 'Close
 #dataset.isnull().sum()
 
 dataset.drop(['Open Time', 'Volume', 'Close Time', 'Quote Asset Volume', 'Number of Trades', 'TB Base Volume', 'TB Quote Volume','Ignore'],1,inplace=True)
-#dataset.drop(['Volume', 'Quote Asset Volume', 'Number of Trades', 'TB Base Volume', 'TB Quote Volume','Ignore'],1,inplace=True)
-
-#df.drop(['Volume', 'Quote Asset Volume', 'Number of Trades', 'TB Base Volume', 'TB Quote Volume','Ignore'],1,inplace=True)
 
 
 dataset['OHLC_avg'] = dataset[['Open','High', 'Low', 'Close']].mean(axis = 1)
@@ -119,15 +109,7 @@ step_size = 1
 
 
 ### LOAD MODEL
-
-
-#https://github.com/galichandrey/h5model/raw/main/myh5model.h5
-#model = tf.keras.models.load_model('my_h5_model.h5')
-#!wget https://github.com/galichandrey/h5model/raw/main/myh5model.h5
 model = tf.keras.models.load_model('myh5model.h5')
-
-# Check its architecture
-#model.summary()
 
 # PREDICTION
 trainPredict = model.predict(trainX)
@@ -139,28 +121,6 @@ trainY = scaler.inverse_transform([trainY])
 testPredict = scaler.inverse_transform(testPredict)
 testY = scaler.inverse_transform([testY])
 
-"""Для загрузки модели!!"""
-
-#!pip install pyyaml h5py
-#checkpoint_path = "cp-{epoch:04d}.ckpt"
-#### Save the weights using the `checkpoint_path` format
-#model.save_weights(checkpoint_path.format(epoch=5))
-
-#model.save_weights("ckpt")
-#load_status = model.load_weights("ckpt")
-
-####todo: Save Checkpoint
-#!mkdir -p saved_model
-#model.save('saved_model/my_model')
-###model.save("my_h5_model.h5")
-
-##todo: Load Checkpoint
-#!pip install pyyaml h5py
-#import tensorflow as tf
-#model = tf.keras.models.load_model('my_h5_model.h5')
-
-## Check its architecture
-###model.summary()
 
 # DE-NORMALIZING MAIN DATASET 
 OHLC_avg = scaler.inverse_transform(OHLC_avg)
